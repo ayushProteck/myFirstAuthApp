@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   Alert,
+  Image,
 } from "react-native";
 
 import {
@@ -22,6 +23,8 @@ import { GoogleSignin } from "@react-native-google-signin/google-signin";
 
 import { Formik } from "formik";
 import * as Yup from "yup";
+
+import { images } from "./assets";
 
 // -------------------- VALIDATION --------------------
 // const AuthSchema = Yup.object().shape({
@@ -182,7 +185,7 @@ export default function App() {
                 {touched.email && errors.email && (
                   <Text style={styles.error}>{errors.email}</Text>
                 )}
-          
+
                 <TextInput
                   placeholder="Password"
                   secureTextEntry
@@ -193,7 +196,7 @@ export default function App() {
                 {touched.password && errors.password && (
                   <Text style={styles.error}>{errors.password}</Text>
                 )}
-          
+
                 {/* Show confirm password only when SIGNUP */}
                 {!isLogin && (
                   <>
@@ -209,7 +212,7 @@ export default function App() {
                     )}
                   </>
                 )}
-          
+
                 <TouchableOpacity style={styles.button} onPress={handleSubmit}>
                   <Text style={styles.buttonText}>
                     {isLogin ? "Login" : "Sign Up"}
@@ -231,7 +234,15 @@ export default function App() {
           <View style={{ height: 25 }} />
 
           <TouchableOpacity style={styles.googleButton} onPress={handleGoogleLogin}>
-            <Text style={styles.googleText}>Sign in with Google</Text>
+            <Image 
+            source={images.GoogleIcon} 
+            style={{
+              // resizeMode: "contain",
+              height: "30",
+              width: "30"
+            }} 
+            resizeMode="contain" />
+            <Text style={styles.googleText}> Continue with Google</Text>
           </TouchableOpacity>
         </View>
       )}
@@ -281,10 +292,15 @@ const styles = StyleSheet.create({
     borderColor: "#999",
     padding: 14,
     borderRadius: 10,
+    // height: "18%",
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: 'row'
   },
   googleText: {
+    marginLeft: 10,
     textAlign: "center",
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: "600",
   },
   error: {
